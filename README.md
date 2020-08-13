@@ -13,4 +13,6 @@ The goals of this project are:
 * Pins with multiple IO functions preferred over FPGA only pins
 * Pins in understandable (ascending) order by FPGA IO number, when possible
 
+![Pinout guide)](https://raw.githubusercontent.com/Blinkinlabs/QL-EOS-S3-breakout/main/documentation/pinout.png)
+
 See the [release PDF](https://raw.githubusercontent.com/Blinkinlabs/QL-EOS-S3-breakout/main/releases/2020-08-13_ql-eos-s3-breakout_RevA.pdf) for the schematic.
