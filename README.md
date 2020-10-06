@@ -15,4 +15,4 @@ The goals of this project are:
 
 ![Pinout guide)](https://raw.githubusercontent.com/Blinkinlabs/QL-EOS-S3-breakout/main/documentation/pinout.png)
 
-See the [release PDF](https://raw.githubusercontent.com/Blinkinlabs/QL-EOS-S3-breakout/main/releases/2020-08-13_ql-eos-s3-breakout_RevA.pdf) for the schematic.
+See the [release PDF](https://raw.githubusercontent.com/Blinkinlabs/QL-EOS-S3-breakout/main/releases/2020-10-06_ql-eos-s3-breakout_RevB.pdf) for the schematic.
