@@ -1,7 +1,9 @@
-# Toolchain setup
+# Toolchain Setup
 
+## Introduction
 This is based on [Quickfeather getting started](https://github.com/QuickLogic-Corp/qorc-sdk#toolchain). There are instructions there for compiling from source.
 
+## Prerequisites
 Some prerequisites for a Debian / Ubuntu environment:
 
     sudo apt install build-essential
@@ -16,6 +18,7 @@ Let's attempt to contain everything in a single directory:
     mkdir $INSTALL_DIR
     cd $INSTALL_DIR
 
+## ARM toolchain
 First up, get ARM GCC:
 
     wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
@@ -23,7 +26,8 @@ First up, get ARM GCC:
 
     export PATH=$INSTALL_DIR/gcc-arm-none-eabi-9-2020-q2-update/bin/:$PATH
 
-Then the FPGA toolchain:
+## FPGA toolchain
+Then Symbiflow:
 
     wget 'https://github.com/QuickLogic-Corp/quicklogic-fpga-toolchain/releases/download/v1.3.0/Symbiflow_v1.3.0.gz.run'
     bash Symbiflow_v1.3.0.gz.run
@@ -41,6 +45,7 @@ And the TinyFPGA bootloader:
 
 _Note: Make sure to activate conda in the previous step before using pip3 to install the python eggs_
 
+## SDK
 Now for the SDK and Blinkinlabs exmaples:
 
     git clone --recursive https://github.com/QuickLogic-Corp/qorc-sdk.git
@@ -48,18 +53,9 @@ Now for the SDK and Blinkinlabs exmaples:
     cd qorc-sdk
     git clone https://github.com/Blinkinlabs/bl_apps.git
 
-Test a project that uses both the ARM and FPGA toolchains:
 
-    cd $INSTALL_DIR/qorc-sdk/bl_apps/bl_helloworldhw/GCC_Project
-    make
-
-And try uploading it to the board:
-
-_Note: First put your board in bootloader mode, by pressing the RESET button, followed by the USER button_
-
-    python3 $INSTALL_DIR/TinyFPGA-Programmer-Application/tinyfpga-programmer-gui.py --m4app output/bin/bl_helloworldhw.bin --reset
-
-If it's working, add the toolchain to your .bashrc:
+# Default enviromnet
+To make the tools available in your default environment, add the following to your .bashrc:
 
     # ARM gcc toolchain
     export PATH=$HOME/ql-eos-s3/gcc-arm-none-eabi-9-2020-q2-update/bin/:$PATH

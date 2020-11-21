@@ -1,7 +1,9 @@
 site_name: QL_EOS_S3 breakout
 
 nav:
+  - Getting Started: getting_started.md
   - Toolchain Setup: toolchain.md
+  - Advanced Topics: advanced.md
 
 theme:
    name: 'material'
