@@ -14,7 +14,7 @@
     
     
       
-        <title>Toolchain Setup - QL_EOS_S3 breakout</title>
+        <title>Getting Started - QL_EOS_S3 breakout</title>
       
     
     
@@ -57,7 +57,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#toolchain-setup" class="md-skip">
+        <a href="#get-started" class="md-skip">
           Skip to content
         </a>
       
@@ -87,7 +87,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Toolchain Setup
+              Getting Started
             
           </span>
         </div>
@@ -159,18 +159,6 @@
       
       
 
-
-  <li class="md-nav__item">
-    <a href="../getting_started/" class="md-nav__link">
-      Getting Started
-    </a>
-  </li>
-
-    
-      
-      
-      
-
   
 
 
@@ -182,12 +170,12 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Toolchain Setup
+        Getting Started
         <span class="md-nav__icon md-icon"></span>
       </label>
     
     <a href="./" class="md-nav__link md-nav__link--active">
-      Toolchain Setup
+      Getting Started
     </a>
     
       
@@ -211,30 +199,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
+  <a href="#what-you-need" class="md-nav__link">
+    What you need
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#arm-toolchain" class="md-nav__link">
-    ARM toolchain
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-install-the-toolchain" class="md-nav__link">
+    Step 1: Install the toolchain
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#fpga-toolchain" class="md-nav__link">
-    FPGA toolchain
+        
+          <li class="md-nav__item">
+  <a href="#step-2-build-an-example-project" class="md-nav__link">
+    Step 2: Build an example project
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#sdk" class="md-nav__link">
-    SDK
+        
+          <li class="md-nav__item">
+  <a href="#step-3-flash-the-project" class="md-nav__link">
+    Step 3: Flash the project
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -242,6 +243,18 @@
   
 </nav>
     
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../toolchain/" class="md-nav__link">
+      Toolchain Setup
+    </a>
   </li>
 
     
@@ -288,30 +301,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
+  <a href="#what-you-need" class="md-nav__link">
+    What you need
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#arm-toolchain" class="md-nav__link">
-    ARM toolchain
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-install-the-toolchain" class="md-nav__link">
+    Step 1: Install the toolchain
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#fpga-toolchain" class="md-nav__link">
-    FPGA toolchain
+        
+          <li class="md-nav__item">
+  <a href="#step-2-build-an-example-project" class="md-nav__link">
+    Step 2: Build an example project
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#sdk" class="md-nav__link">
-    SDK
+        
+          <li class="md-nav__item">
+  <a href="#step-3-flash-the-project" class="md-nav__link">
+    Step 3: Flash the project
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -328,61 +354,41 @@
               
                 
                 
-                <h1 id="toolchain-setup">Toolchain Setup</h1>
+                <h1 id="get-started">Get Started</h1>
 <h2 id="introduction">Introduction</h2>
-<p>This is based on <a href="https://github.com/QuickLogic-Corp/qorc-sdk#toolchain">Quickfeather getting started</a>. There are instructions there for compiling from source.</p>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>Some prerequisites for a Debian / Ubuntu environment:</p>
-<pre><code>sudo apt install build-essential
-sudo apt remove modemmanager
-sudo usermod -a -G dialout $USER
+<p>The QL-EOS-S3 board is a unique, low-cost microcontroller with a built-in FPGA.</p>
+<h2 id="what-you-need">What you need</h2>
+<p>Hardware:</p>
+<ul>
+<li><a href="https://github.com/Blinkinlabs/QL-EOS-S3-breakout">QL-EOS-S3 breakout board</a></li>
+<li>USB-C cable</li>
+<li><a href="https://www.sparkfun.com/products/9717">3.3V FTDI cable</a> (or other USB-serial converter)</li>
+<li>(optional) <a href="https://www.pjrc.com/store/teensy32.html">Teensy 3.2</a>, for restoring the SPI flash.</li>
+<li>(optional) ARM SWD adapter, such as the <a href="https://1bitsquared.com/products/black-magic-probe">Black magic probe</a></li>
+</ul>
+<p>Software:</p>
+<ul>
+<li>ARM GCC toolchain, to compile code for the Cortex M4 processor</li>
+<li>Symbiflow toolchain, for generating FPGA bitstreams</li>
+<li>The QORC Software Development Kit</li>
+<li>Blinkinlabs example projects</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<h3 id="step-1-install-the-toolchain">Step 1: Install the toolchain</h3>
+<p>Follow the <a href="../toolchain/">toolchain setup</a> instructions</p>
+<h3 id="step-2-build-an-example-project">Step 2: Build an example project</h3>
+<p>Test a project that uses both the ARM and FPGA toolchains:</p>
+<pre><code>cd ~/qorc-sdk/bl_apps/bl_helloworldhw/GCC_Project
+make
 </code></pre>
-<p><em>Note: If you just added your user to dialout, log out and then back in again to apply the new membership</em></p>
-<p>Let's attempt to contain everything in a single directory:</p>
-<pre><code>export INSTALL_DIR="$HOME/ql-eos-s3"
-mkdir $INSTALL_DIR
-cd $INSTALL_DIR
-</code></pre>
-<h2 id="arm-toolchain">ARM toolchain</h2>
-<p>First up, get ARM GCC:</p>
-<pre><code>wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
-tar xvjf gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2 -C $INSTALL_DIR
-
-export PATH=$INSTALL_DIR/gcc-arm-none-eabi-9-2020-q2-update/bin/:$PATH
-</code></pre>
-<h2 id="fpga-toolchain">FPGA toolchain</h2>
-<p>Then Symbiflow:</p>
-<pre><code>wget 'https://github.com/QuickLogic-Corp/quicklogic-fpga-toolchain/releases/download/v1.3.0/Symbiflow_v1.3.0.gz.run'
-bash Symbiflow_v1.3.0.gz.run
-
-export PATH="$INSTALL_DIR/install/bin:$INSTALL_DIR/install/bin/python:$PATH"
-source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
-conda activate
-</code></pre>
-<p>And the TinyFPGA bootloader:</p>
-<pre><code>git clone --recursive https://github.com/QuickLogic-Corp/TinyFPGA-Programmer-Application.git
-
-pip3 install pyserial
-pip3 install tinyfpgab
-</code></pre>
-<p><em>Note: Make sure to activate conda in the previous step before using pip3 to install the python eggs</em></p>
-<h2 id="sdk">SDK</h2>
-<p>Now for the SDK and Blinkinlabs exmaples:</p>
-<pre><code>git clone --recursive https://github.com/QuickLogic-Corp/qorc-sdk.git
-
-cd qorc-sdk
-git clone https://github.com/Blinkinlabs/bl_apps.git
-</code></pre>
-<h1 id="default-enviromnet">Default enviromnet</h1>
-<p>To make the tools available in your default environment, add the following to your .bashrc:</p>
-<pre><code># ARM gcc toolchain
-export PATH=$HOME/ql-eos-s3/gcc-arm-none-eabi-9-2020-q2-update/bin/:$PATH
-
-# FPGA toolchain for ql-eos-s3
-export INSTALL_DIR="$HOME/ql-eos-s3"
-export PATH="$HOME/ql-eos-s3/install/bin:$HOME/ql-eos-s3/install/bin/python:$PATH"
-source "$HOME/ql-eos-s3/conda/etc/profile.d/conda.sh"
-conda activate
+<h3 id="step-3-flash-the-project">Step 3: Flash the project</h3>
+<p>Connect your board to your computer using a USB cable, then connect an FTDI cable (technically optional):</p>
+<p><img alt="FTDI connection" src="../img/ftdi_connection_revb.png" /></p>
+<p>Open your favorite serial terminal, and connect to the FTDI serial port with 115200,8N1 setting. Press the reset button on the board (the one closest to the SPI flash chip). The device should send a prompt:</p>
+<p>and then immediately after press the user button (the other one). </p>
+<p>And try uploading it to the board:</p>
+<p><em>Note: First put your board in bootloader mode, by pressing the RESET button, followed by the USER button</em></p>
+<pre><code>python3 $INSTALL_DIR/TinyFPGA-Programmer-Application/tinyfpga-programmer-gui.py --m4app output/bin/bl_helloworldhw.bin --reset
 </code></pre>
                 
               
@@ -402,28 +408,14 @@ conda activate
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../getting_started/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Getting Started
-              </div>
-            </div>
-          </a>
         
-        
-          <a href="../advanced/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../toolchain/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Advanced Topics
+                Toolchain Setup
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

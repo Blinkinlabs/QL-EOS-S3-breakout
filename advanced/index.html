@@ -14,7 +14,7 @@
     
     
       
-        <title>Toolchain Setup - QL_EOS_S3 breakout</title>
+        <title>Advanced Topics - QL_EOS_S3 breakout</title>
       
     
     
@@ -57,7 +57,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#toolchain-setup" class="md-skip">
+        <a href="#advanced-topics" class="md-skip">
           Skip to content
         </a>
       
@@ -87,7 +87,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Toolchain Setup
+              Advanced Topics
             
           </span>
         </div>
@@ -171,6 +171,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../toolchain/" class="md-nav__link">
+      Toolchain Setup
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -182,12 +194,12 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Toolchain Setup
+        Advanced Topics
         <span class="md-nav__icon md-icon"></span>
       </label>
     
     <a href="./" class="md-nav__link md-nav__link--active">
-      Toolchain Setup
+      Advanced Topics
     </a>
     
       
@@ -204,36 +216,49 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#reprogramming-the-spi-flash" class="md-nav__link">
+    Reprogramming the SPI flash
+  </a>
+  
+    <nav class="md-nav" aria-label="Reprogramming the SPI flash">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#introduction" class="md-nav__link">
     Introduction
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
+        
+          <li class="md-nav__item">
+  <a href="#build-the-bootloader" class="md-nav__link">
+    Build the bootloader
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-a-flash-image" class="md-nav__link">
+    Make a flash image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flash-it" class="md-nav__link">
+    Flash it
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#arm-toolchain" class="md-nav__link">
-    ARM toolchain
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fpga-toolchain" class="md-nav__link">
-    FPGA toolchain
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sdk" class="md-nav__link">
-    SDK
+  <a href="#attach-a-jtag-debugger" class="md-nav__link">
+    Attach a JTAG debugger
   </a>
   
 </li>
@@ -242,18 +267,6 @@
   
 </nav>
     
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../advanced/" class="md-nav__link">
-      Advanced Topics
-    </a>
   </li>
 
     
@@ -281,36 +294,49 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#reprogramming-the-spi-flash" class="md-nav__link">
+    Reprogramming the SPI flash
+  </a>
+  
+    <nav class="md-nav" aria-label="Reprogramming the SPI flash">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#introduction" class="md-nav__link">
     Introduction
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
+        
+          <li class="md-nav__item">
+  <a href="#build-the-bootloader" class="md-nav__link">
+    Build the bootloader
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-a-flash-image" class="md-nav__link">
+    Make a flash image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flash-it" class="md-nav__link">
+    Flash it
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#arm-toolchain" class="md-nav__link">
-    ARM toolchain
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fpga-toolchain" class="md-nav__link">
-    FPGA toolchain
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sdk" class="md-nav__link">
-    SDK
+  <a href="#attach-a-jtag-debugger" class="md-nav__link">
+    Attach a JTAG debugger
   </a>
   
 </li>
@@ -328,62 +354,166 @@
               
                 
                 
-                <h1 id="toolchain-setup">Toolchain Setup</h1>
-<h2 id="introduction">Introduction</h2>
-<p>This is based on <a href="https://github.com/QuickLogic-Corp/qorc-sdk#toolchain">Quickfeather getting started</a>. There are instructions there for compiling from source.</p>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>Some prerequisites for a Debian / Ubuntu environment:</p>
-<pre><code>sudo apt install build-essential
-sudo apt remove modemmanager
-sudo usermod -a -G dialout $USER
+                <h1 id="advanced-topics">Advanced topics</h1>
+<h2 id="reprogramming-the-spi-flash">Reprogramming the SPI flash</h2>
+<h3 id="introduction">Introduction</h3>
+<p>The EOS-S3 SoC does not have internal nonvolatile memory, so it boots from an external SPI flash. The breakout board has a bootloader pre-installed in the flash memory, which can be used to program the device using it's USB port. However, if the bootloader becomes corrupted for whatever reason, it can be useful to restore the whole SPI flash.</p>
+<p>To do this, you'll need a <a href="https://www.pjrc.com/store/teensy32.html">Teensy</a> with the <a href="https://github.com/osresearch/spiflash">spiflash</a> firmware loaded.</p>
+<p>First, some technical details. This is the flash memory layout that the quickfeather bootloader is expecting:</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Status</th>
+<th align="right">Start</th>
+<th align="right">Size</th>
+<th align="right">End</th>
+<th align="right">Start</th>
+<th align="right">Size</th>
+<th align="right">End</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bootloader</td>
+<td>Used</td>
+<td align="right">0x0000_0000</td>
+<td align="right">0x0001_0000</td>
+<td align="right">0x0000_FFFF</td>
+<td align="right">0</td>
+<td align="right">65,536</td>
+<td align="right">65,536</td>
+</tr>
+<tr>
+<td>bootfpga CRC</td>
+<td>Used</td>
+<td align="right">0x0001_0000</td>
+<td align="right">8</td>
+<td align="right">0x0001_0007</td>
+<td align="right">65,536</td>
+<td align="right">8</td>
+<td align="right">65,544</td>
+</tr>
+<tr>
+<td>appfpga CRC</td>
+<td>Future</td>
+<td align="right">0x0001_1000</td>
+<td align="right">8</td>
+<td align="right">0x0001_1007</td>
+<td align="right">69,632</td>
+<td align="right">8</td>
+<td align="right">69,640</td>
+</tr>
+<tr>
+<td>appffe CRC</td>
+<td>Future</td>
+<td align="right">0x0001_2000</td>
+<td align="right">8</td>
+<td align="right">0x0001_2007</td>
+<td align="right">73,728</td>
+<td align="right">8</td>
+<td align="right">73,736</td>
+</tr>
+<tr>
+<td>M4app CRC</td>
+<td>Used</td>
+<td align="right">0x0001_3000</td>
+<td align="right">8</td>
+<td align="right">0x0001_3007</td>
+<td align="right">77,824</td>
+<td align="right">8</td>
+<td align="right">77,832</td>
+</tr>
+<tr>
+<td>bootloader CRC</td>
+<td>Used</td>
+<td align="right">0x0001_4000</td>
+<td align="right">8</td>
+<td align="right">0x0001_4007</td>
+<td align="right">81,920</td>
+<td align="right">8</td>
+<td align="right">81,928</td>
+</tr>
+<tr>
+<td>bootfpga</td>
+<td>Used</td>
+<td align="right">0x0002_0000</td>
+<td align="right">0x0002_0000</td>
+<td align="right">0x0003_FFFF</td>
+<td align="right">131,072</td>
+<td align="right">131,072</td>
+<td align="right">262,144</td>
+</tr>
+<tr>
+<td>appfpga</td>
+<td>Future</td>
+<td align="right">0x0004_0000</td>
+<td align="right">0x0002_0000</td>
+<td align="right">0x0005_FFFF</td>
+<td align="right">262,144</td>
+<td align="right">131,072</td>
+<td align="right">393,216</td>
+</tr>
+<tr>
+<td>appffe</td>
+<td>Future</td>
+<td align="right">0x0006_0000</td>
+<td align="right">0x0002_0000</td>
+<td align="right">0x0007_FFFF</td>
+<td align="right">393,216</td>
+<td align="right">131,072</td>
+<td align="right">524,288</td>
+</tr>
+<tr>
+<td>M4app</td>
+<td>Used</td>
+<td align="right">0x0008_0000</td>
+<td align="right">0x0006_E000</td>
+<td align="right">0x000E_DFFF</td>
+<td align="right">524,288</td>
+<td align="right">450,560</td>
+<td align="right">974,848</td>
+</tr>
+</tbody>
+</table>
+<p>The hardware in the SoC only cares about the first section, which contains the bootloader. When it comes out of reset, configuration logic in the SoC reads 32 bits of data from the SPI flash location 0x120, which contains a device ID, the size of the bootloader image, and the desired SPI clock setting. If these are valid, the configuration logic then copies the bootloader into the device SRAM, and then starts the ARM processor.</p>
+<p>Once it starts, the bootloader displays a prompt on the UART pins, then waits 5 seconds. If the user button is pressed during these 5 seconds, then it loads the bootfpga image into the FPGA, which allows the user to reprogram the device using the TinyFPGA programmer. If the button is not pressed within 5 seconds, the bootloader attempts to load the user program from the SPI flash into SRAM. It then verifies that the CRC makes (TODO: Does it actually do this?), and if it does, reconfigures the ARM to point to that code, to enter the user program.</p>
+<p>The TLDR here is that if we want to write a raw image to the flash, we'll need at least the bootloader, bootloader CRC, bootfpga, andd bootfpga CRC sections to be present. For extra points, we can also preinstall a user app by filling the M4app and M4app CRC sections.</p>
+<h3 id="build-the-bootloader">Build the bootloader</h3>
+<p>First, let's build the bootloader:</p>
+<pre><code>cd ~/ql-eos-s3/qorc-sdk/bl_apps/bl_bootloader/GCC_Project
+make
 </code></pre>
-<p><em>Note: If you just added your user to dialout, log out and then back in again to apply the new membership</em></p>
-<p>Let's attempt to contain everything in a single directory:</p>
-<pre><code>export INSTALL_DIR="$HOME/ql-eos-s3"
-mkdir $INSTALL_DIR
-cd $INSTALL_DIR
+<p><em>TODO: what sets up the 0x120 offset in the bootloader binary?</em></p>
+<h3 id="make-a-flash-image">Make a flash image</h3>
+<p>A tool to build a suitable image is included in the <a href="https://github.com/Blinkinlabs/bl_apps/blob/main/tools/build_flash_image.py">bl apps</a>. Using it with the default options will grab the bootloader binary image that we just compiled above, as well as a (for now) precompiled appfpga image:</p>
+<pre><code>cd ~/ql-eos-s3/qorc-sdk/bl_apps/tools
+python3 build_flash_image.py
+added section:bootloader at:0x00000000 size:38228 crc:0x555d0a3e
+added section:bootfpga at:0x00020000 size:75960 crc:0x82fc1983
+Wrote 0xee000 bytes to image.bin
 </code></pre>
-<h2 id="arm-toolchain">ARM toolchain</h2>
-<p>First up, get ARM GCC:</p>
-<pre><code>wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
-tar xvjf gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2 -C $INSTALL_DIR
-
-export PATH=$INSTALL_DIR/gcc-arm-none-eabi-9-2020-q2-update/bin/:$PATH
+<p>This should create a file called 'image.bin', which we can then load on the SPI flash chip, starting at offset 0.</p>
+<h3 id="flash-it">Flash it</h3>
+<p>Connect the Teensy to the dev board like so. Be sure to short the 'RST' pin on the board to 'GND', to prevent the SoC from booting:</p>
+<p><img alt="Teensy flash diagram" src="../img/teensy_spi_flash_connection_revb.png" /></p>
+<p><em>TODO: text version of the pin table</em></p>
+<p>Next, connect both the Teensy and the board to your computer using USB. Use your favorite serial terminal to connect to the Teensy. Issue the 'i' command to check if the SPI flash can be identified:</p>
+<pre><code>i
+(device ID should be returned)
 </code></pre>
-<h2 id="fpga-toolchain">FPGA toolchain</h2>
-<p>Then Symbiflow:</p>
-<pre><code>wget 'https://github.com/QuickLogic-Corp/quicklogic-fpga-toolchain/releases/download/v1.3.0/Symbiflow_v1.3.0.gz.run'
-bash Symbiflow_v1.3.0.gz.run
-
-export PATH="$INSTALL_DIR/install/bin:$INSTALL_DIR/install/bin/python:$PATH"
-source "$INSTALL_DIR/conda/etc/profile.d/conda.sh"
-conda activate
+<p>Now, tell the Teensy that we want to write EE000 bytes to the SPI flash, starting at offset 0. If the flash image was a different length, use that instead:</p>
+<pre><code>u0 EE0000
+G 00000000 EE0000
 </code></pre>
-<p>And the TinyFPGA bootloader:</p>
-<pre><code>git clone --recursive https://github.com/QuickLogic-Corp/TinyFPGA-Programmer-Application.git
-
-pip3 install pyserial
-pip3 install tinyfpgab
+<p><em>Note: The 'u' will not be echoed to the terminal</em></p>
+<p>Exit the serial terminal, and then use the PV command to write the image:</p>
+<pre><code>pv image.bin &gt; /dev/ttyACM0
 </code></pre>
-<p><em>Note: Make sure to activate conda in the previous step before using pip3 to install the python eggs</em></p>
-<h2 id="sdk">SDK</h2>
-<p>Now for the SDK and Blinkinlabs exmaples:</p>
-<pre><code>git clone --recursive https://github.com/QuickLogic-Corp/qorc-sdk.git
-
-cd qorc-sdk
-git clone https://github.com/Blinkinlabs/bl_apps.git
-</code></pre>
-<h1 id="default-enviromnet">Default enviromnet</h1>
-<p>To make the tools available in your default environment, add the following to your .bashrc:</p>
-<pre><code># ARM gcc toolchain
-export PATH=$HOME/ql-eos-s3/gcc-arm-none-eabi-9-2020-q2-update/bin/:$PATH
-
-# FPGA toolchain for ql-eos-s3
-export INSTALL_DIR="$HOME/ql-eos-s3"
-export PATH="$HOME/ql-eos-s3/install/bin:$HOME/ql-eos-s3/install/bin/python:$PATH"
-source "$HOME/ql-eos-s3/conda/etc/profile.d/conda.sh"
-conda activate
-</code></pre>
+<p>Now, detach the Teensy, then remove the jumper between RST and GND to boot flash image.</p>
+<h2 id="attach-a-jtag-debugger">Attach a JTAG debugger</h2>
+<p><em>TODO</em></p>
+<p>Using JTAG with the RevB board reuqires pulling up both IO_8 and IO_9, and supplying a clock to FCLK. Additionally, the 10k pullups on SWD and SCK may not be present, and would need to be added externally. A future revision will use an alternate JTAG pin mapping, to allow it to be used with the on-board oscillator.</p>
                 
               
               
@@ -402,7 +532,7 @@ conda activate
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../getting_started/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../toolchain/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -411,25 +541,11 @@ conda activate
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Getting Started
+                Toolchain Setup
               </div>
             </div>
           </a>
         
-        
-          <a href="../advanced/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Advanced Topics
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
         
       </nav>
     </div>
