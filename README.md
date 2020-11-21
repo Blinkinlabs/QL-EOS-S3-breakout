@@ -1,6 +1,6 @@
 # QL-EOS-S3-breakout
 
-![Render of the PCB design)](https://raw.githubusercontent.com/Blinkinlabs/QL-EOS-S3-breakout/main/documentation/concept_design.png)
+![Pinout guide)](https://raw.githubusercontent.com/Blinkinlabs/QL-EOS-S3-breakout/main/docs/images/pinout_revb.png)
 
 A breadboard-friendly, low part count breakout board for the QuickLogic EOS-S3 ARM/FPGA IC.
 
@@ -13,6 +13,5 @@ The goals of this project are:
 * Pins with multiple IO functions preferred over FPGA only pins
 * Pins in understandable (ascending) order by FPGA IO number, when possible
 
-![Pinout guide)](https://raw.githubusercontent.com/Blinkinlabs/QL-EOS-S3-breakout/main/documentation/pinout.png)
 
 See the [release PDF](https://raw.githubusercontent.com/Blinkinlabs/QL-EOS-S3-breakout/main/releases/2020-10-06_ql-eos-s3-breakout_RevB.pdf) for the schematic.
