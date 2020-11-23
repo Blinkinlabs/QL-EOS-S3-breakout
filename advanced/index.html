@@ -243,22 +243,63 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#build-the-bootloader" class="md-nav__link">
-    Build the bootloader
+  <a href="#step-1-build-the-bootloader" class="md-nav__link">
+    Step 1: Build the bootloader
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#make-a-flash-image" class="md-nav__link">
-    Make a flash image
+  <a href="#step-2-make-a-flash-image" class="md-nav__link">
+    Step 2: Make a flash image
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#flash-it" class="md-nav__link">
-    Flash it
+  <a href="#step-3-flash-it" class="md-nav__link">
+    Step 3: Flash it
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-the-io-pins-in-bank-a-to-a-different-reference-voltage" class="md-nav__link">
+    Set the IO pins in Bank A to a different reference voltage
+  </a>
+  
+    <nav class="md-nav" aria-label="Set the IO pins in Bank A to a different reference voltage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction_1" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-cut-the-vccioa-jumper-on-the-back-of-the-board" class="md-nav__link">
+    Step 1: Cut the VCCIOA jumper on the back of the board
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-provide-a-171-33v-reference-on-the-vcca-pin" class="md-nav__link">
+    Step 2: Provide a 1.71 - 3.3V reference on the VCCA pin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-power-on-the-board" class="md-nav__link">
+    Step 3: Power on the board (?)
   </a>
   
 </li>
@@ -321,22 +362,63 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#build-the-bootloader" class="md-nav__link">
-    Build the bootloader
+  <a href="#step-1-build-the-bootloader" class="md-nav__link">
+    Step 1: Build the bootloader
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#make-a-flash-image" class="md-nav__link">
-    Make a flash image
+  <a href="#step-2-make-a-flash-image" class="md-nav__link">
+    Step 2: Make a flash image
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#flash-it" class="md-nav__link">
-    Flash it
+  <a href="#step-3-flash-it" class="md-nav__link">
+    Step 3: Flash it
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-the-io-pins-in-bank-a-to-a-different-reference-voltage" class="md-nav__link">
+    Set the IO pins in Bank A to a different reference voltage
+  </a>
+  
+    <nav class="md-nav" aria-label="Set the IO pins in Bank A to a different reference voltage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction_1" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-cut-the-vccioa-jumper-on-the-back-of-the-board" class="md-nav__link">
+    Step 1: Cut the VCCIOA jumper on the back of the board
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-provide-a-171-33v-reference-on-the-vcca-pin" class="md-nav__link">
+    Step 2: Provide a 1.71 - 3.3V reference on the VCCA pin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-power-on-the-board" class="md-nav__link">
+    Step 3: Power on the board (?)
   </a>
   
 </li>
@@ -491,13 +573,13 @@
 <p>The hardware in the SoC only cares about the first section, which contains the bootloader. When it comes out of reset, configuration logic in the SoC reads 32 bits of data from the SPI flash location 0x120, which contains a device ID, the size of the bootloader image, and the desired SPI clock setting. If these are valid, the configuration logic then copies the bootloader into the device SRAM, and then starts the ARM processor.</p>
 <p>Once it starts, the bootloader displays a prompt on the UART pins, then waits 5 seconds. If the user button is pressed during these 5 seconds, then it loads the bootfpga image into the FPGA, which allows the user to reprogram the device using the TinyFPGA programmer. If the button is not pressed within 5 seconds, the bootloader attempts to load the user program from the SPI flash into SRAM. It then verifies that the CRC makes (TODO: Does it actually do this?), and if it does, reconfigures the ARM to point to that code, to enter the user program.</p>
 <p>The TLDR here is that if we want to write a raw image to the flash, we'll need at least the bootloader, bootloader CRC, bootfpga, andd bootfpga CRC sections to be present. For extra points, we can also preinstall a user app by filling the M4app and M4app CRC sections.</p>
-<h3 id="build-the-bootloader">Build the bootloader</h3>
+<h3 id="step-1-build-the-bootloader">Step 1: Build the bootloader</h3>
 <p>First, let's build the bootloader:</p>
 <pre><code>cd ~/ql-eos-s3/qorc-sdk/bl_apps/bl_bootloader/GCC_Project
 make
 </code></pre>
 <p><em>TODO: what sets up the 0x120 offset in the bootloader binary?</em></p>
-<h3 id="make-a-flash-image">Make a flash image</h3>
+<h3 id="step-2-make-a-flash-image">Step 2: Make a flash image</h3>
 <p>A tool to build a suitable image is included in the <a href="https://github.com/Blinkinlabs/bl_apps/blob/main/tools/build_flash_image.py">bl apps</a>. Using it with the default options will grab the bootloader binary image that we just compiled above, as well as a (for now) precompiled appfpga image:</p>
 <pre><code>cd ~/ql-eos-s3/qorc-sdk/bl_apps/tools
 python3 build_flash_image.py
@@ -506,7 +588,7 @@ added section:bootfpga at:0x00020000 size:75960 crc:0x82fc1983
 Wrote 0xee000 bytes to image.bin
 </code></pre>
 <p>This should create a file called 'image.bin', which we can then load on the SPI flash chip, starting at offset 0.</p>
-<h3 id="flash-it">Flash it</h3>
+<h3 id="step-3-flash-it">Step 3: Flash it</h3>
 <p>Connect the Teensy to the dev board like so. Be sure to short the 'RST' pin on the board to 'GND', to prevent the SoC from booting:</p>
 <p><img alt="Teensy flash diagram" src="../img/teensy_spi_flash_connection_revb.png" /></p>
 <p><em>TODO: text version of the pin table</em></p>
@@ -523,6 +605,13 @@ G 00000000 EE0000
 <pre><code>pv image.bin &gt; /dev/ttyACM0
 </code></pre>
 <p>Now, detach the Teensy, then remove the jumper between RST and GND to boot flash image.</p>
+<h2 id="set-the-io-pins-in-bank-a-to-a-different-reference-voltage">Set the IO pins in Bank A to a different reference voltage</h2>
+<h3 id="introduction_1">Introduction</h3>
+<p>If you need to interface with a device that uses a different logic voltage than 3.3V, it is possible to set the reference voltage for the pins on Bank A. That includes all of the IO pins on the right side of the board:</p>
+<p><em>TODO pin drawing</em></p>
+<h3 id="step-1-cut-the-vccioa-jumper-on-the-back-of-the-board">Step 1: Cut the VCCIOA jumper on the back of the board</h3>
+<h3 id="step-2-provide-a-171-33v-reference-on-the-vcca-pin">Step 2: Provide a 1.71 - 3.3V reference on the VCCA pin</h3>
+<h3 id="step-3-power-on-the-board">Step 3: Power on the board (?)</h3>
 <h2 id="attach-a-jtag-debugger">Attach a JTAG debugger</h2>
 <p><em>TODO</em></p>
 <p>Using JTAG with the RevB board reuqires pulling up both IO_8 and IO_9, and supplying a clock to FCLK. Additionally, the 10k pullups on SWD and SCK may not be present, and would need to be added externally. A future revision will use an alternate JTAG pin mapping, to allow it to be used with the on-board oscillator.</p>
