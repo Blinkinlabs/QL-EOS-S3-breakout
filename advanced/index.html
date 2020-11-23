@@ -284,22 +284,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-1-cut-the-vccioa-jumper-on-the-back-of-the-board" class="md-nav__link">
-    Step 1: Cut the VCCIOA jumper on the back of the board
+  <a href="#step-1-cut-the-vccioa-trace-on-the-back-of-the-board" class="md-nav__link">
+    Step 1: Cut the VCCIOA trace on the back of the board
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-2-provide-a-171-33v-reference-on-the-vcca-pin" class="md-nav__link">
-    Step 2: Provide a 1.71 - 3.3V reference on the VCCA pin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-3-power-on-the-board" class="md-nav__link">
-    Step 3: Power on the board (?)
+  <a href="#step-2-provide-a-171-36v-reference-on-the-vcca-pin" class="md-nav__link">
+    Step 2: Provide a 1.71 - 3.6V reference on the VCCA pin
   </a>
   
 </li>
@@ -403,22 +396,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-1-cut-the-vccioa-jumper-on-the-back-of-the-board" class="md-nav__link">
-    Step 1: Cut the VCCIOA jumper on the back of the board
+  <a href="#step-1-cut-the-vccioa-trace-on-the-back-of-the-board" class="md-nav__link">
+    Step 1: Cut the VCCIOA trace on the back of the board
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-2-provide-a-171-33v-reference-on-the-vcca-pin" class="md-nav__link">
-    Step 2: Provide a 1.71 - 3.3V reference on the VCCA pin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step-3-power-on-the-board" class="md-nav__link">
-    Step 3: Power on the board (?)
+  <a href="#step-2-provide-a-171-36v-reference-on-the-vcca-pin" class="md-nav__link">
+    Step 2: Provide a 1.71 - 3.6V reference on the VCCA pin
   </a>
   
 </li>
@@ -607,11 +593,14 @@ G 00000000 EE0000
 <p>Now, detach the Teensy, then remove the jumper between RST and GND to boot flash image.</p>
 <h2 id="set-the-io-pins-in-bank-a-to-a-different-reference-voltage">Set the IO pins in Bank A to a different reference voltage</h2>
 <h3 id="introduction_1">Introduction</h3>
-<p>If you need to interface with a device that uses a different logic voltage than 3.3V, it is possible to set the reference voltage for the pins on Bank A. That includes all of the IO pins on the right side of the board:</p>
-<p><em>TODO pin drawing</em></p>
-<h3 id="step-1-cut-the-vccioa-jumper-on-the-back-of-the-board">Step 1: Cut the VCCIOA jumper on the back of the board</h3>
-<h3 id="step-2-provide-a-171-33v-reference-on-the-vcca-pin">Step 2: Provide a 1.71 - 3.3V reference on the VCCA pin</h3>
-<h3 id="step-3-power-on-the-board">Step 3: Power on the board (?)</h3>
+<p>If you need to interface with a device that uses a different logic voltage than 3.3V, it is possible to set the reference voltage for the pins on Bank A.</p>
+<h3 id="step-1-cut-the-vccioa-trace-on-the-back-of-the-board">Step 1: Cut the VCCIOA trace on the back of the board</h3>
+<p>On the back side of the board, cut the short copper trace in the middle of the 'VCCIOA' pad. This will disconnect the VCCIOA power line from the on-board 3.3V regulator:
+<img alt="Cut the VCCIO trace" src="../img/vccioa_cut_trace_revb.png" /></p>
+<h3 id="step-2-provide-a-171-36v-reference-on-the-vcca-pin">Step 2: Provide a 1.71 - 3.6V reference on the VCCA pin</h3>
+<p>Once the trace has been cut, you'll need to connect an external voltage to the header pin marked 'VCCA'. Then, all of the pins on the right-hand side of the board will be referenced to the external supply:
+<img alt="VCCIOA pins" src="../img/vccioa_pins_revb.png" /></p>
+<p><em>Note: The datasheet specifies a range of 1.71-3.6V for safe operation</em></p>
 <h2 id="attach-a-jtag-debugger">Attach a JTAG debugger</h2>
 <p><em>TODO</em></p>
 <p>Using JTAG with the RevB board reuqires pulling up both IO_8 and IO_9, and supplying a clock to FCLK. Additionally, the 10k pullups on SWD and SCK may not be present, and would need to be added externally. A future revision will use an alternate JTAG pin mapping, to allow it to be used with the on-board oscillator.</p>
