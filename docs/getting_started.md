@@ -32,7 +32,7 @@ Test a project that uses both the ARM and FPGA toolchains:
     make
 
 ### Step 3: Connect to the board
-Connect your board to your computer using a USB cable, then connect an FTDI cable (technically optional):
+Connect your board to your computer using a USB cable. Next, connect an FTDI cable:
 
 ![FTDI connection](img/ftdi_connection_revb.png)
 

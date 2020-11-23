@@ -28,7 +28,7 @@ Once it starts, the bootloader displays a prompt on the UART pins, then waits 5 
 
 The TLDR here is that if we want to write a raw image to the flash, we'll need at least the bootloader, bootloader CRC, bootfpga, andd bootfpga CRC sections to be present. For extra points, we can also preinstall a user app by filling the M4app and M4app CRC sections.
 
-### Build the bootloader
+### Step 1: Build the bootloader
 First, let's build the bootloader:
 
     cd ~/ql-eos-s3/qorc-sdk/bl_apps/bl_bootloader/GCC_Project
@@ -36,7 +36,7 @@ First, let's build the bootloader:
 
 _TODO: what sets up the 0x120 offset in the bootloader binary?_
 
-### Make a flash image
+### Step 2: Make a flash image
 A tool to build a suitable image is included in the [bl apps](https://github.com/Blinkinlabs/bl_apps/blob/main/tools/build_flash_image.py). Using it with the default options will grab the bootloader binary image that we just compiled above, as well as a (for now) precompiled appfpga image:
 
     cd ~/ql-eos-s3/qorc-sdk/bl_apps/tools
@@ -48,7 +48,7 @@ A tool to build a suitable image is included in the [bl apps](https://github.com
 
 This should create a file called 'image.bin', which we can then load on the SPI flash chip, starting at offset 0.
 
-### Flash it
+### Step 3: Flash it
 Connect the Teensy to the dev board like so. Be sure to short the 'RST' pin on the board to 'GND', to prevent the SoC from booting:
 
 ![Teensy flash diagram](img/teensy_spi_flash_connection_revb.png)
@@ -72,6 +72,20 @@ Exit the serial terminal, and then use the PV command to write the image:
     pv image.bin > /dev/ttyACM0
 
 Now, detach the Teensy, then remove the jumper between RST and GND to boot flash image.
+
+## Set the IO pins in Bank A to a different reference voltage
+### Introduction
+If you need to interface with a device that uses a different logic voltage than 3.3V, it is possible to set the reference voltage for the pins on Bank A.
+
+### Step 1: Cut the VCCIOA trace on the back of the board
+On the back side of the board, cut the short copper trace in the middle of the 'VCCIOA' pad. This will disconnect the VCCIOA power line from the on-board 3.3V regulator:
+![Cut the VCCIO trace](img/vccioa_cut_trace_revb.png)
+
+### Step 2: Provide a 1.71 - 3.6V reference on the VCCA pin
+Once the trace has been cut, you'll need to connect an external voltage to the header pin marked 'VCCA'. Then, all of the pins on the right-hand side of the board will be referenced to the external supply:
+![VCCIOA pins](img/vccioa_pins_revb.png)
+
+_Note: The datasheet specifies a range of 1.71-3.6V for safe operation_
 
 ## Attach a JTAG debugger
 _TODO_

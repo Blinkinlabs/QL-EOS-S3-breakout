@@ -61,16 +61,4 @@ sdkconfig.old
 .settings/
 
 # Project specific
-build/
-components/frontend/
-components/fpga_bin/
-test/fpga_test/build/
-doxygen/html/
-doxygen/log.txt
-examples/build-*/
-documentation/.ipynb_checkpoints/
-
-examples/BlinkyPWM_UWP/BlinkyPWM_UWP/obj/
-examples/BlinkyPWM_UWP/BlinkyPWM_UWP/bin/
-examples/BlinkyPWM_UWP/BlinkyPWM_UWP/*.pfx
-examples/BlinkyPWM_UWP/.vs/
+site/
