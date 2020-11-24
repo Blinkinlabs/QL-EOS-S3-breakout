@@ -193,9 +193,65 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Pinout
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Pinout
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#conflict-pins-center-of-the-board" class="md-nav__link">
+    Conflict pins (center of the board)
+  </a>
+  
+    <nav class="md-nav" aria-label="Conflict pins (center of the board)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spi-pins" class="md-nav__link">
+    SPI pins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bootstrap-pins" class="md-nav__link">
+    Bootstrap pins
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pins-you-can-use-directly-from-the-arm-core" class="md-nav__link">
+    Pins you can use directly from the ARM core
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -229,6 +285,48 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#conflict-pins-center-of-the-board" class="md-nav__link">
+    Conflict pins (center of the board)
+  </a>
+  
+    <nav class="md-nav" aria-label="Conflict pins (center of the board)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spi-pins" class="md-nav__link">
+    SPI pins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bootstrap-pins" class="md-nav__link">
+    Bootstrap pins
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pins-you-can-use-directly-from-the-arm-core" class="md-nav__link">
+    Pins you can use directly from the ARM core
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -244,8 +342,14 @@
 <p>Compared to a normal microcontroller, the pins on the QL-EOS-S3 SoC are a little goofy. Similar to a normal microcontroller, it has some hardware GPIO pins that are attached to the ARM core, along with standard peripherals such as UART, I2C, and SPI busses, along with an analog port. Unlike a normal microcontroller, however, most of the pins are not connected to the ARM core at all! Instead, they are all connected to the FPGA core, and can be used by writing your own peripherals in Verilog.</p>
 <p>Here is a map of all of the fixed pins on the board:</p>
 <p><img alt="Pinout" src="../img/pinout_revb.png" /></p>
-<p><em>Note: In the RevC board, some of the pins are shifted around, and ADC1 is replaced by IO_15</em></p>
-<p><em>TODO: Table of available pins with alternate functions listed</em></p>
+<p>All of the pins on the right and left sides of the boards can be used freely. Note that the two JTAG pins (IO_44 and IO_45 on RevB) have on-board pullup resistors to the 3.3V line. The pins in the center section are also available for use, however they affect how the SoC boots.</p>
+<h2 id="conflict-pins-center-of-the-board">Conflict pins (center of the board)</h2>
+<h3 id="spi-pins">SPI pins</h3>
+<p>The SPI pins (CLK, MOSI, MISO, and SS1) are attached to the on-board SPI flash. The CLK, MOSI, and MISO pins can be safely shared with other SPI devices, but note that the SoC needs to read from the SPI flash to boot. If you're desperate for pins, it should be possible to  put the SPI flash into deep sleep, after which the SS1 pin might also be available.</p>
+<h3 id="bootstrap-pins">Bootstrap pins</h3>
+<p>IO_8, IO_9, IO_19, and IO_20 are all </p>
+<h2 id="pins-you-can-use-directly-from-the-arm-core">Pins you can use directly from the ARM core</h2>
+<p>The arm core is </p>
                 
               
               
