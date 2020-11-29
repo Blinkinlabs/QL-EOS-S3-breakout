@@ -58,7 +58,9 @@ _TODO: text version of the pin table_
 Next, connect both the Teensy and the board to your computer using USB. Use your favorite serial terminal to connect to the Teensy. Issue the 'i' command to check if the SPI flash can be identified:
 
     i
-    (device ID should be returned)
+    C84015C8
+
+_Note: The device ID for the flash on your board may differ, this is for the 2MB version_
 
 Now, tell the Teensy that we want to write EE000 bytes to the SPI flash, starting at offset 0. If the flash image was a different length, use that instead:
 
