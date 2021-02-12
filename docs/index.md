@@ -14,3 +14,5 @@ The goals of this project are:
 * Pins in understandable (ascending) order by FPGA IO number, when possible
 
 See the [release PDF](https://raw.githubusercontent.com/Blinkinlabs/QL-EOS-S3-breakout/main/releases/2020-10-06_ql-eos-s3-breakout_RevB.pdf) for the schematic.
+
+Want one? [Sign up](https://forms.gle/7uMRd7YTaTRd96Ph6) to be notified when they are available!
